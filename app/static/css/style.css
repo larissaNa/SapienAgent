@@ -1,0 +1,96 @@
+/* Tipografia */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f6fa;
+}
+
+/* Chat histórico */
+#chat-history {
+    scrollbar-width: thin;
+    scrollbar-color: #6c757d #e9ecef;
+    padding-right: 5px;
+}
+
+#chat-history::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-history::-webkit-scrollbar-track {
+    background: #e9ecef;
+}
+
+#chat-history::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+    border-radius: 4px;
+}
+
+/* Balões de mensagem */
+.message {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    max-width: 70%;
+    position: relative;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.message.user {
+    background-color: #0d6efd;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+    margin-bottom: 15px; /* aumenta o espaçamento */
+}
+
+.message.bot {
+    background-color: #e9ecef;
+    color: #212529;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+    margin-bottom: 15px; /* aumenta o espaçamento */
+}
+
+
+/* Feedback (thumbs up/down) */
+.feedback {
+    display: flex;
+    gap: 5px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.feedback i {
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.2s;
+}
+
+.feedback i:hover {
+    color: #28a745; /* Verde para destaque */
+}
+
+/* Botão de enviar */
+#send-btn {
+    transition: background-color 0.2s;
+}
+
+#send-btn:hover {
+    background-color: #198754; /* Verde de destaque */
+}
+
+.hidden {
+    display: none;
+}
+#typing {
+    font-style: italic;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+
+/* Animação fade-in */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
