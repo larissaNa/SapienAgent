@@ -7,12 +7,12 @@ const typing = document.getElementById('typing');
 function addMessage(text, sender='bot') {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender);
+    const now = new Date();
+    const hh = now.getHours().toString().padStart(2,'0');
+    const mm = now.getMinutes().toString().padStart(2,'0');
     messageDiv.innerHTML = `
         <span>${text}</span>
-        ${sender === 'bot' ? `<div class="feedback">
-            <i class="bi bi-hand-thumbs-up"></i>
-            <i class="bi bi-hand-thumbs-down"></i>
-        </div>` : ''}
+        <small class="timestamp">${hh}:${mm}</small>
     `;
     chatHistory.appendChild(messageDiv);
     chatHistory.scrollTop = chatHistory.scrollHeight; // scroll automático
@@ -35,7 +35,9 @@ function sendMessage() {
   .then(res => res.json())
   .then(data => {
     typing.classList.add('hidden');
-    addMessage(data.responses, 'bot');
+    if (data && data.responses) {
+      addMessage(data.responses, 'bot');
+    }
   })
   .catch(err => {
     typing.classList.add('hidden');
@@ -51,3 +53,24 @@ chatInput.addEventListener('keypress', function(e) {
         sendMessage();
     }
 });
+
+// Polling simples para resultados do scheduler
+let schedulerPoller = null;
+function startSchedulerPolling() {
+  if (schedulerPoller) return;
+  schedulerPoller = setInterval(async () => {
+    try {
+      const res = await fetch('/scheduler/results');
+      const data = await res.json();
+      if (Array.isArray(data.results) && data.results.length) {
+        data.results.forEach(txt => addMessage(txt, 'bot'));
+      }
+    } catch (e) {
+      // silencioso para não poluir UI
+      console.error('scheduler poll error', e);
+    }
+  }, 3000);
+}
+
+// inicia o polling ao carregar
+startSchedulerPolling();
