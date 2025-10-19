@@ -1,5 +1,6 @@
 """
 Módulo para gerenciar estado compartilhado entre os agentes do pipeline.
+É uma forma de manter e rastrear informações enquanto um sistema de IA processa dados.
 """
 from typing import Dict, Any, Optional, Set
 

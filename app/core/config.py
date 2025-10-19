@@ -32,6 +32,7 @@ def create_llm_with_retry():
 
 llm = create_llm_with_retry()
 
+
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 vectorstore = Chroma(
     collection_name="artigos_cientificos",
