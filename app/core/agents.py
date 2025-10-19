@@ -61,7 +61,7 @@ chromadb_agent = create_react_agent(
     name="chromadb_agent"
 )
 
-# --- SUPERVISOR ATUALIZADO ---
+# --- SUPERVISOR ---
 supervisor_graph = create_supervisor(
     model=llm,
     agents=[tavily_agent, arxiv_agent, sched_agent, nlp_agent, validation_agent, chromadb_agent],
